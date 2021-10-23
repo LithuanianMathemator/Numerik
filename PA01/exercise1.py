@@ -2,6 +2,8 @@ import skimage as sk
 import numpy as np
 import matplotlib
 
+
+
 def func1mean(A, weight = 1):
     # type of A: numpy array
     # weight: 0 = random, 1 = equal, 2 = test of 100 random matrices
