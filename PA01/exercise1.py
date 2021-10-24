@@ -1,7 +1,7 @@
 import skimage as sk
 import numpy as np
-import matplotlib
-
+import matplotlib as plt
+from skimage import io
 
 
 def func1mean(A, weight = 1):
