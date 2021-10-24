@@ -1,3 +1,8 @@
+import skimage as sk
+import numpy as np
+import matplotlib as plt
+from skimage import io
+
 def func1medianfilter(s, weight=1, bild='B1.png'):
 
     picture = io.imread(bild)
