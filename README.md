@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/LithuanianMathemator/Programmieraufgaben/blob/main/tulogo.png?raw=true)
 
-### Entwickelt von:
+### Developed by:
 
 - Vanessa Brandes
 - Tu Anh Nguyen
