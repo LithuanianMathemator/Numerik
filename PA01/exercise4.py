@@ -14,24 +14,21 @@ def plot_bilateral():
     # calculate bilateral filter
     print('image: B1\n')
     B1_out = bilateral(B1_in)
-    #print('\nimage: B2\n')
-    #B2_out = bilateral(B2_in)
-    #print('\nimage: C\n')
-    #C_out = bilateral(C_in)
+    print('\n\nimage: B2\n')
+    B2_out = bilateral(B2_in)
+    print('\n\nimage: C\n')
+    C_out = bilateral(C_in)
     print('')
 
     _t_end = time.time()
-    print(_t_end - _t_start)
+    #print(_t_end - _t_start)
 
     # display results
     u.view(B1_in, B1_out)
-    #u.view(B2_out)
-    #u.view(C_out)
+    u.view(B2_in, B2_out)
+    u.view(C_in , C_out)
 
-    # wait for enter to terminate
-    input()
-
-# bilateral gaussian filter6
+# bilateral gaussian filter
 def bilateral(image, s=1, rho_s=3, rho_r=75):
     (m, n) = image.shape
     target = np.ndarray(shape=(m, n), dtype=np.uint8)
@@ -39,9 +36,9 @@ def bilateral(image, s=1, rho_s=3, rho_r=75):
     for i in range(m):
         for j in range(n):
             target[i, j] = calculate_pixel(image, i, j, m, n, s, rho_s, rho_r)
-            #u.progress(i, j, m, n)             # 80s
-            #print((i, j), end='\r')            # 38s
-                                                # 32s
+            #u.progress(i, j, m, n)             # 253s
+            #print((i, j), end='\r')            # 118s
+                                                # 104s
     return target
 
 # calculate pixel for bilateral gaussian filter

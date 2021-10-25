@@ -1,8 +1,6 @@
 from skimage import io
 import matplotlib.pyplot as plot
 
-_img_count = 0
-
 # open B1
 def B1():
     return openPNG('B1.png')
@@ -29,9 +27,7 @@ def openPNG(path):
 
 # display image
 def view(image1, image2, _cmap='gray'):
-    global _img_count
-    p = plot.figure(_img_count)
-    _img_count += 1
+    p = plot.figure()
 
     p.add_subplot(1, 2, 1)
     plot.imshow(image1, cmap=_cmap)
@@ -41,7 +37,7 @@ def view(image1, image2, _cmap='gray'):
 
     p = plot.show()
 
-# print progress (slow, x2)
+# print progress (slow, x2,5)
 def progress(i, j, m, n):
     pct_1 = i/(m-1)
     pct_2 = j/(n-1)
@@ -55,11 +51,10 @@ def progress(i, j, m, n):
             print('#', end='')
         else:
             print(' ', end='')
-    print('] ' + str(i+1) + '/' + str(m) + '   \nrows: [', end='')
+    print('] ' + str(i+1) + '/' + str(m) + '\nrows: [', end='')
     for k in range(10):
         if k <= _val2-1:
             print('#', end='')
         else:
             print(' ', end='')
     print('] ' + str(j+1) + '/' + str(n) + '   ', end='')
-        
