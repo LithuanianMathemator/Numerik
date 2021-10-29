@@ -37,7 +37,7 @@ def func1mean(A, W, weight):
 
         return meanA
 
-    elif weight == 2: # 100 matrices test
+    elif weight == 2: #test of 100 matrices
 
         M = []
         N = []
