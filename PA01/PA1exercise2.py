@@ -11,7 +11,7 @@ def func1mean(A, W, weight):
     n = len(A)
     m = len(A[0])
 
-    if weight == 0: #ungewichtet (gleichgewichtet)
+    if weight == 0: 
 
         summe = 0
         for i in range(0, n):
@@ -28,7 +28,7 @@ def func1mean(A, W, weight):
 
         return meanA
 
-    elif weight == 1: #ohne Gewicht
+    elif weight == 1:
 
         meanA = 0
         for i in range(0, n):
