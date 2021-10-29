@@ -218,7 +218,7 @@ def func1medianfilter(s, weight=1, bild='B1.png'):
                         b = j + y
 
                         if abs(x) <= M and abs(y) <= M:
-                            wval = np.exp(-(x**2 + y**2)/(2*sigma**2))
+                            wval = np.exp(-((x+s)**2 + (y+s)**2)/(2*sigma**2))
                         else:
                             wval = 0
 
