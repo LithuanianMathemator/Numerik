@@ -114,8 +114,7 @@ def func1median(A, W=[0], weight=1):
 ##################### 2. #####################    
     
 def gaussianweight(s, sigma):
-    lenW = float(0.5 * (s-1))
-    vector = np.linspace(-lenW, lenW, 2*s+1)
+    vector = np.linspace(-s, s, 2*s+1)
     gaussian_vector = np.exp(-0.5 * np.square(vector)/np.square(sigma))
     W = np.outer(gaussian_vector, gaussian_vector)
     return W
