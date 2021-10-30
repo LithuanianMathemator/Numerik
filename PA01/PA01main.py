@@ -43,18 +43,15 @@ def func1mean(A, W, weight):
     elif weight == 2: #test of 100 matrices
 
         M = []
-        N = []
 
         for i in range(100):
 
-            P = np.random.randint(1, 100, size=2)
-            A = np.random.randint(20, size=(P[0], P[1]))
-            W = np.random.randint(20, size=(P[0], P[1])) #?
+            sizing = np.random.randint(3, 20, size=2)
+            A = np.random.randint(257, size=(sizing[0], sizing[1]))
 
-            M.append(abs(np.mean(A) - func1mean(A, W, 0)))
-            N.append(abs(np.mean(A) - func1mean(A, W, 1)))
+            M.append(abs(np.mean(A) - func1mean(A)))
 
-        return max(M), max(N)
+        return max(M)
 
     else:
 
