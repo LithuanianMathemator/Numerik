@@ -60,70 +60,55 @@ def func1mean(A, W, weight):
 
         return "C'mon bro!"
     
-def func1median(A, weight = 1):
+def func1median(A, W=[0], weight=1):
     # type of A: numpy array
     # weight: 0 = random, 1 = equal, 2 = test of 100 random matrices
 
     n = len(A)
     m = len(A[0])
 
-    W = np.random.rand(n, m)
-    # 'weight matrix'
-
     if weight == 0:
 
-        summe = 0
-        for i in range(0, n):
-            summe += sum(W[i])
+        medianlist = []
 
-        for i in range(0, n):
-            for j in range(0, m):
-                W[i][j] = W[i][j]/summe
+        for i in range(len(A)):
+            for j in range(len(A[0])):
+                medianlist.append([A[i][j], W[i][j]])
 
-        Wflat = np.array(W).flatten()
-        Aflat = np.sort(np.array(A).flatten())
+        medianlist.sort(key=lambda x: x[0])
 
-        s = 0
-        k = 0
-        while s < 0.5:
-             s += Wflat[k]
-             k += 1
+        q = 0
+        p = 0
+        while q < 0.5:
+            q += medianlist[p][1]
+            p += 1
 
-        # gewichteter Median aus Signalverarbeitung
-        if s == 0.5:
-            return (Aflat[k] + Aflat[k+1])/2
+        if q == 0.5:
+            return (1/2) * (int(medianlist[p-1][0]) + int(medianlistEps[p][0]))
         else:
-            if k > n*m:
-                return Aflat[k-1]
-            else:
-                return Aflat[k]
+            return medianlist[p][0]
 
     elif weight == 1:
 
         Aflat = np.sort(np.array(A).flatten())
-
-        print(Aflat)
 
         if (n*m) % 2 == 0:
             return (Aflat[(n*m)//2-1] + Aflat[(n*m)//2])/2
         else:
             return Aflat[(n*m)//2]
 
-
     elif weight == 2:
 
         M = []
-        N = []
 
         for i in range(100):
 
-            P = np.random.randint(3, 100, size=2)
-            A = np.random.randint(20, size=(P[0], P[1]))
+            sizing = np.random.randint(3, 20, size=2)
+            A = np.random.randint(257, size=(sizing[0], sizing[1]))
 
-            M.append(abs(np.median(A) - func1median(A, 0)))
-            N.append(abs(np.median(A) - func1median(A, 1)))
+            M.append(abs(np.median(A) - func1median(A)))
 
-        return max(M), max(N)
+        return max(M)
 
     else:
 
