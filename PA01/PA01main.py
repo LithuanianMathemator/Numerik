@@ -6,7 +6,7 @@ from skimage import io
 
 ##################### 1. #####################
 
-def func1mean(A, W, weight):
+def func1mean(A, W=[[0]], weight=1):
     # type of A: numpy array
     # W: weight matrix as numpy array
     # weight: 0 = random, 1 = equal, 2 = test of 100 random matrices
