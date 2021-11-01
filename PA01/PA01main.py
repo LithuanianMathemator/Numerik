@@ -243,7 +243,7 @@ def func1medianfilter(s, weight=0, bild='PA01/C.png'):
         plt.axis('off')
 
         plt.tight_layout()
-        plt.title('Medianfilter ohne Gauß, s= ' + s + ', Bild = ' + bild + '!')
+        plt.title('Medianfilter ohne Gauß, s= ' + str(s) + ', Bild = ' + str(bild) + '!')
         plt.show()
 
     if weight == 0:
@@ -328,7 +328,7 @@ def func1medianfilter(s, weight=0, bild='PA01/C.png'):
         plt.axis('off')
 
         plt.tight_layout()
-        plt.title('Medianfilter mit Gauß, s= ' + s + ', Bild = ' + bild + '!')
+        plt.title('Medianfilter mit Gauß, s= ' + str(s) + ', Bild = ' + str(bild) + '!')
         plt.show()
 
     
@@ -437,16 +437,16 @@ if __name__ == "__main__":
     print('\n-----\nimage: B1')
     B1_in = io.imread('PA01/B1.png')
     B1_out = bilateral(B1_in, s=2, rho_s=3, rho_r=75)
-    view(B1_in, B1_out, 'B1.png, Bilateraler Filter, s=2')
+    view(B1_in, B1_out, 'B1, Bilateraler Filter, s=2')
 
     print('\nimage: B2')
     B2_in = io.imread('PA01/B1.png')
     B2_out = bilateral(B2_in, s=3, rho_s=3, rho_r=75)
-    view(B2_in, B2_out, 'B2.png, Bilateraler Filter, s=3')
+    view(B2_in, B2_out, 'B2, Bilateraler Filter, s=3')
 
     print('\nimage: C')
     C_in = io.imread('PA01/B1.png')
     C_out = bilateral(C_in, s=3, rho_s=3, rho_r=75)
-    view(C_in, C_out, 'C.png, Bilateraler Filter, s=3')
+    view(C_in, C_out, 'C, Bilateraler Filter, s=3')
 
     print('')
