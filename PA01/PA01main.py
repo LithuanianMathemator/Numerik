@@ -142,6 +142,7 @@ def meanfilter(s, W, weight, image):
     
         plt.imshow(newpicture, cmap="gray")
         plt.axis("off")
+        plt.title("Mittelwertfilter mit s=" + str(s) + ", Bild: " + image)
         plt.tight_layout()
         plt.show()
     
@@ -157,15 +158,16 @@ def meanfilter(s, W, weight, image):
         
         plt.imshow(newpicture, cmap="gray")
         plt.axis("off")
+        plt.title("Gaußfilter mit s=" + str(s) + ", Bild: " + image)
         plt.tight_layout()
         plt.show()
         
-        #plt.imshow(W_gauss, cmap="gray")
-        #plt.axis("off")
-        #plt.tight_layout()
-        #plt.show()
+        plt.imshow(W_gauss, cmap="gray")
+        plt.axis("off")
+        plt.title("Gewichte des Gaußfilters")
+        plt.tight_layout()
+        plt.show()
 
-W = np.random.uniform(20, size=(5, 5))
 
 # image filtering: 0 = gaussian, 1 = equal    
 #meanfilter(2, W, 0, image = "PA01/B1.png")
@@ -410,7 +412,16 @@ def view(image1, image2, title, _cmap='gray'):
 
 if __name__ == "__main__":
     #mean
+    W = np.random.uniform(20, size=(5, 5))
+    B1_out0 = meanfilter(2, W, 0, image = "B1.png")
+    B1_out1 = meanfilter(2, W, 1, image = "B1.png")
 
+    B2_out0 = meanfilter(2, W, 0, image = "B2.png")
+    B2_out1 = meanfilter(2, W, 1, image = "B2.png")
+
+    C_out0 = meanfilter(2, W, 0, image = "C.png")
+    C_out1 = meanfilter(2, W, 1, image = "C.png")
+    
     #median
     
     func1medianfilter(2, 1, 'B1.png')
