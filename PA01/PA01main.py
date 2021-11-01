@@ -81,7 +81,7 @@ def func1median(A, W=[0], weight=1):
             p += 1
 
         if q == 0.5:
-            return (1/2) * (int(medianlist[p-1][0]) + int(medianlistEps[p][0]))
+            return (1/2) * (int(medianlist[p-1][0]) + int(medianlist[p][0]))
         else:
             return medianlist[p][0]
 
