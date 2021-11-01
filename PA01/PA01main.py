@@ -348,7 +348,7 @@ def bilateral(image, s=1, rho_s=3, rho_r=75):
     for i in range(m):
         for j in range(n):
             target[i, j] = calculate_pixel(image, i, j, m, n, s, W_s, W_r)
-            print((i, j), end='\r')
+            #print((i, j), end='\r')
     return target
 
 def calculate_pixel(image, k, l, m, n, s, W_s, W_r):
@@ -434,19 +434,17 @@ if __name__ == "__main__":
 
     #bilateral
 
-    print('\n-----\nimage: B1')
+    #print('\n-----\nimage: B1')
     B1_in = io.imread('B1.png')
     B1_out = bilateral(B1_in, s=2, rho_s=3, rho_r=75)
     view(B1_in, B1_out, 'B1.png, Bilateraler Filter, s=2')
 
-    print('\nimage: B2')
+    #print('\nimage: B2')
     B2_in = io.imread('B2.png')
     B2_out = bilateral(B2_in, s=3, rho_s=3, rho_r=75)
     view(B2_in, B2_out, 'B2.png, Bilateraler Filter, s=3')
 
-    print('\nimage: C')
+    #print('\nimage: C')
     C_in = io.imread('C.png')
     C_out = bilateral(C_in, s=3, rho_s=3, rho_r=75)
     view(C_in, C_out, 'C.png, Bilateraler Filter, s=3')
-
-    print('')
