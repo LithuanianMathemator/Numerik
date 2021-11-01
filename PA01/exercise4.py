@@ -12,20 +12,20 @@ def plot_bilateral():
     t = time.time()
 
     # calculate bilateral filter
-    print('image: B1')
-    B1_out = bilateral(B1_in, s=2, rho_s=3, rho_r=75)
-    print('\nimage: B2')
-    B2_out = bilateral(B2_in, s=2, rho_s=4, rho_r=120)
+    #print('image: B1')
+    #B1_out = bilateral(B1_in, s=2, rho_s=3, rho_r=75)
+    #print('\nimage: B2')
+    #B2_out = bilateral(B2_in, s=2, rho_s=4, rho_r=120)
     print('\nimage: C')
-    C_out = bilateral(C_in, s=3, rho_s=3, rho_r=75)
+    C_out = bilateral(C_in, s=2, rho_s=3, rho_r=75)
     print('')
 
     print(time.time() - t)
 
     # display results
     #u.view(B1_in, B1_out)
-    u.view(B2_in, B2_out, 'abc')
-    #u.view(C_in , C_out)
+    #u.view(B2_in, B2_out, 'abc')
+    u.view(C_in , C_out, 'title')
 
 # bilateral gaussian filter
 def bilateral(image, s=1, rho_s=3, rho_r=75):
