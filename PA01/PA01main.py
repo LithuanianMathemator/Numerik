@@ -142,7 +142,7 @@ def meanfilter(s, W, weight, image):
     
         plt.imshow(newpicture, cmap="gray")
         plt.axis("off")
-        plt.title("Mittelwertfilter mit s =" + str(s) + ", Bild: " + image)
+        plt.title("Mittelwertfilter mit s = " + str(s) + ", Bild: " + image)
         plt.tight_layout()
         plt.show()
     
@@ -158,7 +158,7 @@ def meanfilter(s, W, weight, image):
         
         plt.imshow(newpicture, cmap="gray")
         plt.axis("off")
-        plt.title("Gaußfilter mit s=" + str(s) + ", Bild: " + image)
+        plt.title("Gaußfilter mit s = " + str(s) + ", Bild: " + image)
         plt.tight_layout()
         plt.show()
         
