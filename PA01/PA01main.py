@@ -413,6 +413,11 @@ def view(image1, image2, title, _cmap='gray'):
 
 
 if __name__ == "__main__":
+    #first function
+    func1mean(A=[[0]], weight = 2)
+    func1median(A=[[0]], weight = 2)
+    
+    
     #mean
     W = np.random.uniform(20, size=(5, 5))
     B1_out0 = meanfilter(2, W, 0, image = "B1.png")
