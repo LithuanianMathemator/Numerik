@@ -407,6 +407,8 @@ def view(image1, image2, title, _cmap='gray'):
     fig.suptitle(title)
     p1.imshow(image1, cmap=_cmap)
     p2.imshow(image2, cmap=_cmap)
+    p1.axis('off')
+    p2.axis('off')
     plt.show()
 
 
@@ -441,7 +443,7 @@ if __name__ == "__main__":
 
     #print('\nimage: B2')
     B2_in = io.imread('B2.png')
-    B2_out = bilateral(B2_in, s=3, rho_s=3, rho_r=75)
+    B2_out = bilateral(B2_in, s=2, rho_s=4, rho_r=120)
     view(B2_in, B2_out, 'B2.png, Bilateraler Filter, s=3')
 
     #print('\nimage: C')

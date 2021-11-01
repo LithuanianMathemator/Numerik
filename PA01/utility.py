@@ -1,5 +1,5 @@
 from skimage import io
-import matplotlib.pyplot as plot
+import matplotlib.pyplot as plt
 
 # open B1
 def B1():
@@ -26,16 +26,14 @@ def openPNG(path):
     return PNG
 
 # display image
-def view(image1, image2, _cmap='gray'):
-    p = plot.figure()
-
-    p.add_subplot(1, 2, 1)
-    plot.imshow(image1, cmap=_cmap)
-
-    p.add_subplot(1, 2, 2)
-    plot.imshow(image2, cmap=_cmap)
-
-    p = plot.show()
+def view(image1, image2, title, _cmap='gray'):
+    fig, (p1, p2) = plt.subplots(1, 2)
+    fig.suptitle(title)
+    p1.imshow(image1, cmap=_cmap)
+    p2.imshow(image2, cmap=_cmap)
+    p1.axis('off')
+    p2.axis('off')
+    plt.show()
 
 # print progress (slow, x2,5)
 def progress(i, j, m, n):
