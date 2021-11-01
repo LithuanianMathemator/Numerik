@@ -241,6 +241,7 @@ def func1medianfilter(s, weight=0, bild='PA01/C.png'):
         plt.axis('off')
 
         plt.tight_layout()
+        plt.title('Medianfilter ohne Gauß, s= ' + s + ', Bild = ' + bild + '!')
         plt.show()
 
     if weight == 0:
@@ -325,6 +326,7 @@ def func1medianfilter(s, weight=0, bild='PA01/C.png'):
         plt.axis('off')
 
         plt.tight_layout()
+        plt.title('Medianfilter mit Gauß, s= ' + s + ', Bild = ' + bild + '!')
         plt.show()
 
     
@@ -410,6 +412,14 @@ if __name__ == "__main__":
     #mean
 
     #median
+    
+    func1medianfilter(2, 1, 'B1.png')
+    func1medianfilter(2, 0, 'B1.png')
+    func1medianfilter(2, 1, 'B2.png')
+    func1medianfilter(2, 0, 'B2.png')
+    func1medianfilter(2, 1, 'C.png')
+    func1medianfilter(2, 0, 'C.png')
+    
 
     #bilateral
 
