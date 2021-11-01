@@ -142,7 +142,7 @@ def meanfilter(s, W, weight, image):
     
         plt.imshow(newpicture, cmap="gray")
         plt.axis("off")
-        plt.title("Mittelwertfilter mit s=" + str(s) + ", Bild: " + image)
+        plt.title("Mittelwertfilter mit s = " + str(s) + ", Bild: " + image)
         plt.tight_layout()
         plt.show()
     
@@ -158,7 +158,7 @@ def meanfilter(s, W, weight, image):
         
         plt.imshow(newpicture, cmap="gray")
         plt.axis("off")
-        plt.title("Gaußfilter mit s=" + str(s) + ", Bild: " + image)
+        plt.title("Gaußfilter mit s = " + str(s) + ", Bild: " + image)
         plt.tight_layout()
         plt.show()
         
@@ -243,7 +243,7 @@ def func1medianfilter(s, weight=0, bild='PA01/C.png'):
         plt.axis('off')
 
         plt.tight_layout()
-        plt.title('Medianfilter ohne Gauß, s= ' + str(s) + ', Bild = ' + str(bild) + '!')
+        plt.title('Medianfilter ohne Gauß, s = ' + str(s) + ', Bild = ' + str(bild) + '!')
         plt.show()
 
     if weight == 0:
@@ -328,7 +328,7 @@ def func1medianfilter(s, weight=0, bild='PA01/C.png'):
         plt.axis('off')
 
         plt.tight_layout()
-        plt.title('Medianfilter mit Gauß, s= ' + str(s) + ', Bild = ' + str(bild) + '!')
+        plt.title('Medianfilter mit Gauß, s = ' + str(s) + ', Bild = ' + str(bild) + '!')
         plt.show()
 
     
