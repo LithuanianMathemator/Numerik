@@ -1,6 +1,8 @@
 import skimage as sk
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
+from numpy.core.defchararray import array
+from numpy.lib.type_check import imag
 from skimage import io
 
 
@@ -137,7 +139,7 @@ def meanfilter(s, W, weight, image):
         for i in range(s,n-s):
             for j in range(s, m-s):
                 B = padded[i-s:i+s+1, j-s:j+s+1]
-                newpicture[i][j] = func1mean(B,W,0)
+                newpicture[i][j] = func1mean(B,W,1)
     
         plt.imshow(newpicture, cmap="gray")
         plt.axis("off")
@@ -159,28 +161,27 @@ def meanfilter(s, W, weight, image):
         plt.tight_layout()
         plt.show()
         
-        plt.imshow(W_gauss, cmap="gray")
-        plt.axis("off")
-        plt.tight_layout()
-        plt.show()
+        #plt.imshow(W_gauss, cmap="gray")
+        #plt.axis("off")
+        #plt.tight_layout()
+        #plt.show()
 
 W = np.random.uniform(20, size=(5, 5))
 
 # image filtering: 0 = gaussian, 1 = equal    
-meanfilter(2, W, 0, image = "B1.png")
-meanfilter(2, W, 1, image = "B1.png")
+#meanfilter(2, W, 0, image = "PA01/B1.png")
+#meanfilter(2, W, 1, image = "PA01/B1.png")
 
-meanfilter(2, W, 0, image = "B2.png")
-meanfilter(2, W, 1, image = "B2.png")
+#meanfilter(2, W, 0, image = "PA01/B2.png")
+#meanfilter(2, W, 1, image = "PA01/B2.png")
 
-meanfilter(2, W, 0, image = "C.png")
-meanfilter(2, W, 1, image = "C.png")
+#meanfilter(2, W, 0, image = "PA01/C.png")
+#meanfilter(2, W, 1, image = "PA01/C.png")
 
 
 ##################### 3. #####################    
-    
-    
-def func1medianfilter(s, weight=1, bild='B1.png'):
+
+def func1medianfilter(s, weight=0, bild='PA01/C.png'):
 
     picture = io.imread(bild)
 
@@ -327,6 +328,8 @@ def func1medianfilter(s, weight=1, bild='B1.png'):
         plt.tight_layout()
         plt.show()
 
+    
+#func1medianfilter(3, bild='PA01/B2.png', weight=0)
 
 ##################### 4. #####################    
 
@@ -395,3 +398,14 @@ def c(x, y, m, n):
     _x = -abs(abs(x) - (m-1)) + (m-1)
     _y = -abs(abs(y) - (n-1)) + (n-1) 
     return (_x, _y)
+
+
+if __name__ == "__main__":
+    '''
+    This is executed when the script is run.
+    '''
+    #img = mpimg.imread("img.png")
+    #print(img.shape)
+    #result = fancy_image_processing(img)
+    #plt.imshow(result, cmap='gray')
+    #plt.show()
