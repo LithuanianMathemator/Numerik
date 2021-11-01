@@ -437,16 +437,16 @@ if __name__ == "__main__":
     print('\n-----\nimage: B1')
     B1_in = io.imread('PA01/B1.png')
     B1_out = bilateral(B1_in, s=2, rho_s=3, rho_r=75)
-    view(B1_in, B1_out, 'test')
+    view(B1_in, B1_out, 'B1, Bilateraler Filter')
 
     print('\nimage: B2')
     B2_in = io.imread('PA01/B1.png')
     B2_out = bilateral(B2_in, s=3, rho_s=3, rho_r=75)
-    view(B2_in, B2_out)
+    view(B2_in, B2_out, 'B2, Bilateraler Filter')
 
     print('\nimage: C')
     C_in = io.imread('PA01/B1.png')
     C_out = bilateral(C_in, s=3, rho_s=3, rho_r=75)
-    view(C_in, C_out)
+    view(C_in, C_out, 'C, Bilateraler Filter')
 
     print('')
