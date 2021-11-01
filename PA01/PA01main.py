@@ -1,8 +1,6 @@
 import skimage as sk
 import numpy as np
 import matplotlib.pyplot as plt
-from numpy.core.defchararray import array
-from numpy.lib.type_check import imag
 from skimage import io
 
 
@@ -404,8 +402,9 @@ if __name__ == "__main__":
     '''
     This is executed when the script is run.
     '''
-    #img = mpimg.imread("img.png")
-    #print(img.shape)
-    #result = fancy_image_processing(img)
-    #plt.imshow(result, cmap='gray')
-    #plt.show()
+
+    #mean
+
+    #median
+
+    #bilateral
