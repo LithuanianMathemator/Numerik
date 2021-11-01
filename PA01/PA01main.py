@@ -1,3 +1,4 @@
+from typing import TextIO
 import skimage as sk
 import numpy as np
 import matplotlib.pyplot as plt
@@ -397,14 +398,34 @@ def c(x, y, m, n):
     _y = -abs(abs(y) - (n-1)) + (n-1) 
     return (_x, _y)
 
+def view(image1, image2, title, _cmap='gray'):
+    fig, (p1, p2) = plt.subplots(1, 2)
+    fig.suptitle(title)
+    p1.imshow(image1, cmap=_cmap)
+    p2.imshow(image2, cmap=_cmap)
+    plt.show()
+
 
 if __name__ == "__main__":
-    '''
-    This is executed when the script is run.
-    '''
-
     #mean
 
     #median
 
     #bilateral
+
+    print('\n-----\nimage: B1')
+    B1_in = io.imread('PA01/B1.png')
+    B1_out = bilateral(B1_in, s=2, rho_s=3, rho_r=75)
+    view(B1_in, B1_out, 'test')
+
+    print('\nimage: B2')
+    B2_in = io.imread('PA01/B1.png')
+    B2_out = bilateral(B2_in, s=3, rho_s=3, rho_r=75)
+    view(B2_in, B2_out)
+
+    print('\nimage: C')
+    C_in = io.imread('PA01/B1.png')
+    C_out = bilateral(C_in, s=3, rho_s=3, rho_r=75)
+    view(C_in, C_out)
+
+    print('')

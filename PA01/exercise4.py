@@ -14,11 +14,11 @@ def plot_bilateral():
     # calculate bilateral filter
     print('image: B1')
     B1_out = bilateral(B1_in, s=2, rho_s=3, rho_r=75)
-    #print('\nimage: B2')
-    #B2_out = bilateral(B2_in, s=3, rho_s=3, rho_r=75)
-    #print('\nimage: C')
-    #C_out = bilateral(C_in, s=3, rho_s=3, rho_r=75)
-    #print('')
+    print('\nimage: B2')
+    B2_out = bilateral(B2_in, s=3, rho_s=3, rho_r=75)
+    print('\nimage: C')
+    C_out = bilateral(C_in, s=3, rho_s=3, rho_r=75)
+    print('')
 
     print(time.time() - t)
 
