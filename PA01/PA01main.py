@@ -455,3 +455,7 @@ if __name__ == "__main__":
     C_in = io.imread('C.png')
     C_out = bilateral(C_in, s=2, rho_s=3, rho_r=75)
     view(C_in, C_out, 'C.png, Bilateraler Filter, s=3')
+    
+    
+    
+    
