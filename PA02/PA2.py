@@ -1,5 +1,8 @@
 import numpy as np
 from scipy import sparse
+from matplotlib import pyplot as plt
+from skimage import io
+from skimage.color import rgb2gray
 
 def laplaceoperator(n,m):
     # n,m: Bildgröße
@@ -83,7 +86,7 @@ def seamlessdiff(f, g, pos):
     first = np.zeros(len(newb))
 
     # CG to get f
-    newf = scipy.sparse.linalg.cg(newdelt, newb, x0=first, \
+    newf = sparse.linalg.cg(newdelt, newb, x0=first, \
     maxiter=400, M=None, callback=None, atol=None)
 
     print(newf[0])
