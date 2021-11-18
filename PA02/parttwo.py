@@ -61,17 +61,11 @@ def grayhelp(f, g, pos):
 
     deviation = lp_big @ (cut_f.flatten())
 
-    # print(deviation)
-
     # determining b by multiplying g with laplace operator and cutting it down
     gradient_g = lp_big @ (g.flatten())
 
-    # print(gradient_g)
-
     # correcting deviation
     gradient_g -= deviation
-
-    # print(gradient_g)
 
     # getting b by turning back into a matrix, deleting the border and
     # vectorizing again
