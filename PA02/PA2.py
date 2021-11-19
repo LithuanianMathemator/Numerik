@@ -6,20 +6,26 @@ from skimage.color import rgb2gray
 
 def laplaceoperator(n,m):
     # n,m: Bildgröße
+    # änderung zu m,n wäre sinnvoll
     
     l = n * m
     hauptdiag = np.ones(l) * -4
     nebendiag = np.ones(l-1)
-    außendiag = np.ones(l-3)
+    #außendiag = np.ones(l-3)
+    außendiag = np.ones(l-m)
 
+    #for i in range(1,l-1):
+    #    if i % 4 == 0:
+    #        nebendiag[i] = 0
     for i in range(1,l-1):
-        if i % 4 == 0:
-            nebendiag[i] = 0
+        if i % m == 0:
+            nebendiag[i-1] = 0
             
     
     diagonalen = [hauptdiag, nebendiag, nebendiag, außendiag, außendiag]
     
-    matrix = sparse.diags(diagonalen, [0,-1,1,n,-n])
+    #matrix = sparse.diags(diagonalen, [0,-1,1,n,-n])
+    matrix = sparse.diags(diagonalen, [0,-1,1,m,-m])
     return matrix
 
 def seamlessdiff(f, g, pos):
