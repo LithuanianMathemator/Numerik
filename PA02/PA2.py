@@ -115,6 +115,3 @@ def seamlessdiff(f, g, pos):
 def seamlessdiff_advanced(f, g):
     pic_f = io.imread(f)
     pic_g = io.imread(g)
-    print(pic_f)
-
-seamlessdiff()
