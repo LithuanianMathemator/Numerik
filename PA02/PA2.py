@@ -66,6 +66,7 @@ def seamlessdiff(f, g, pos):
 
     # tracking of equations that are not needed
     colbool = [True for i in range(len(vec_f))]
+    #colbool = [True]*len(vec_f)
 
     # bringing stuff to the right side
     for i in range(len(vec_f)):
@@ -109,3 +110,11 @@ def seamlessdiff(f, g, pos):
 
     plt.tight_layout()
     plt.show()
+
+
+def seamlessdiff_advanced(f, g):
+    pic_f = io.imread(f)
+    pic_g = io.imread(g)
+    print(pic_f)
+
+seamlessdiff()
