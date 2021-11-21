@@ -64,7 +64,7 @@ def grayhelp(f, g, pos):
     # f* and g as matrices
     # pos: tuple to situate g
 
-    r = 37
+    r = 1
 
     N = len(g)
     M = len(g[0])
