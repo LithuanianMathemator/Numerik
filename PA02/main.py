@@ -188,7 +188,7 @@ def mergeimages(f, g, x, y):
 
     (n, m) = (len(img_g), len(img_g[0]))
 
-    img_f[x:x+n, y:y+m] = g
+    img_f[x:x+n, y:y+m] = img_g
 
     return img_f
 
