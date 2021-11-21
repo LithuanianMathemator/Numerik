@@ -192,3 +192,5 @@ if __name__ == "__main__":
     
     seamlessmatrix('water.jpg', 'bear.jpg', (18,18))
     seamlessmatrix('bird.jpg', 'plane.jpg', (50,260))
+    
+    
