@@ -180,6 +180,16 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
 
     return pic_f
 
+def mergeimages(f, g, x, y):
+    img_f = io.imread(f)
+    img_g = io.imread(g)
+
+    (n, m) = (len(img_g), len(img_g[0]))
+
+    img_f[x:x+n, y:y+m] = g
+
+    return img_f
+
 def plot(img):
     plt.imshow(img, cmap='gray')
     plt.axis('off')
@@ -196,9 +206,11 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
     
+    plot(mergeimages('water.jpg', 'bear.jpg', 18, 18))
     seamlessmatrix('water.jpg', 'bear.jpg', (18,18))
-    seamlessmatrix('bird.jpg', 'plane.jpg', (50,260))
-    
     plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 18, 18))
+
+    plot(mergeimages('water.jpg', 'bear.jpg', 50, 260))
+    seamlessmatrix('bird.jpg', 'plane.jpg', (50,260))
     plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 50, 260))
     
