@@ -174,7 +174,6 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
             print('cut matrices')
 
         (vec_h, info) = scipy.sparse.linalg.cg(delta, b_cut, x0=np.zeros(len(b_cut)), maxiter=n_iter, atol=None, M=None, callback=None)
-        print('.')
         h[:, :, i] = vec_h.reshape(n-2*r, m-2*r, order='F')
         if verbose:
             print('solved SLE')
