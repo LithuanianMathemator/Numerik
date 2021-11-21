@@ -52,9 +52,16 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
         if verbose:
             print('calculated gradient norm')
         
+        '''
         v_x = np.ndarray(shape=(n, m))
         v_y = np.ndarray(shape=(n, m))
+        '''
 
+
+        v_x = np.where(norm_f > norm_g, grad_f_x, grad_g_x)
+        v_y = np.where(norm_f > norm_g, grad_f_y, grad_g_y)
+
+        '''
         for j in range(n):
             for k in range(m):
                 if norm_f[j, k] > norm_g[j, k]:
@@ -63,7 +70,8 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
                 else:
                     v_x[j, k] = grad_g_x[j, k]
                     v_y[j, k] = grad_g_y[j, k]
-        
+        '''
+
         if verbose:
             print('determined v')
 
@@ -90,16 +98,19 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
             print('cut matrices')
         
         (vec_h, info) = linalg.cg(delta, b_cut, x0=np.zeros(len(b_cut)), maxiter=n_iter, atol=None, M=None, callback=None)
+        print('.')
         h[:, :, i] = vec_h.reshape(n-2*r, m-2*r, order='F')
         if verbose:
             print('solved SLE')
     np.clip(h, 0, 255, out=h)
     pic_f[x+r:x+n-r, y+r:y+m-r, :] = h
-    
-    plt.imshow(pic_f, cmap='gray')
-    plt.axis('off')
-    plt.tight_layout()
-    plt.show()
 
-#seamlessdiff_advanced('PA02/water.jpg', 'PA02/bear.jpg', 0, 0)
-seamlessdiff_advanced('PA02/bird.jpg', 'PA02/plane.jpg', 50, 250)
+    return pic_f
+
+#pic = seamlessdiff_advanced('PA02/water.jpg', 'PA02/bear.jpg', 0, 0)
+#pic = seamlessdiff_advanced('PA02/bird.jpg', 'PA02/plane.jpg', 50, 250, verbose=True)
+
+#plt.imshow(pic, cmap='gray')
+#plt.axis('off')
+#plt.tight_layout()
+#plt.show()
