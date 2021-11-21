@@ -1,4 +1,3 @@
-
 import numpy as np
 from scipy import sparse
 from scipy import linalg
@@ -182,4 +181,11 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
     return pic_f
 
 if __name__ == "__main__":
-    pass
+    laplacer = laplaceoperator(5,7)
+    laplacer = laplacer.toarray()
+    plt.imshow(laplacer, cmap='gray', interpolation='nearest')
+
+    plt.axis('off')
+
+    plt.tight_layout()
+    plt.show()
