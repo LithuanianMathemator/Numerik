@@ -180,3 +180,6 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
     pic_f[x+r:x+n-r, y+r:y+m-r, :] = h
 
     return pic_f
+
+if __name__ == "__main__":
+    pass
