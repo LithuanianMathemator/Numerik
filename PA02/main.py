@@ -22,91 +22,86 @@ def laplaceoperator(n,m):
     matrix = sparse.diags(diagonalen, [0,-1,1,n,-n])
     return matrix
 
-def seamlessdiff(f, g, pos):
+def laplace(n, m):
 
-    # pos as tuple
+    I_m = sparse.eye(m)
+    I_n = sparse.eye(n)
+    D_m = sparse.diags([1, -2, 1], [-1, 0, 1], shape=(m, m))
+    D_n = sparse.diags([1, -2, 1], [-1, 0, 1], shape=(n, n))
 
-    # reading files and converting [0,1] scale to [0,255] scale for uint8
-    pic_f = io.imread(f)                                    # this is f*
-    pic_g = io.imread(g)
-    gray_f = np.uint8(rgb2gray(pic_f)*255)
-    gray_g = np.uint8(rgb2gray(pic_g)*255)
+    operator = sparse.kron(I_m, D_n) + sparse.kron(D_m, I_n)
 
+    return operator
 
-    N_f = len(pic_f)                                        # size of f*
-    N_g = len(pic_g)                                        # size of f and g
-    M_f = len(pic_f[0])
-    M_g = len(pic_g[0])
+def seamlessmatrix(f, g, pos):
 
-    # slicing to get matrix of replaced f
-    gray_r = gray_f[pos[0]:pos[0]+N_g ,pos[1]:pos[1]+M_g]   # space of f* to be
-                                                            # replaced
-    r = 5
+    f_blue = np.int32((io.imread(f))[..., 2])
+    f_green = np.int32((io.imread(f))[..., 1])
+    f_red = np.int32((io.imread(f))[..., 0])
 
-    gray_r[r:-r, r:-r] = np.full((N_g-(2*r), M_g-(2*r)), 0)
-    # np.full((N_g-4, M_g-4), -1)
-    # np.zeros((N_g-4, M_g-4))
-    # gray_r[0:, 0:] = gray_g
+    g_blue = np.int32((io.imread(g))[..., 2])
+    g_green = np.int32((io.imread(g))[..., 1])
+    g_red = np.int32((io.imread(g))[..., 0])
 
-    # vectorizing f and g
-    vec_f = gray_r.flatten('F')
-    vec_g = gray_g.flatten('F')
+    red = grayhelp(f_red, g_red, pos)
+    green = grayhelp(f_green, g_green, pos)
+    blue = grayhelp(f_blue, g_blue, pos)
 
-    delta = laplaceoperator(N_g, M_g)
+    result = np.dstack((red, green, blue))
 
-    b = delta @ vec_g
-
-    T = delta.transpose()
-
-    print(b)
-    print(T.tocsr()[0:1, 0:].multiply(vec_f[0]))
-
-    # tracking of equations that are not needed
-    colbool = [True for i in range(len(vec_f))]
-    #colbool = [True]*len(vec_f)
-
-    # bringing stuff to the right side
-    for i in range(len(vec_f)):
-        if vec_f[i] != 0:
-            b -= T.tocsr()[i:i+1, 0:].multiply(vec_f[i])
-            colbool[i] = False
-
-    remlist = []
-    for i in range(len(vec_f)):
-        if colbool[i]:
-            remlist.append(i)
-
-    b = np.asarray(b)[0]
-
-    # making the LGS smaller
-    coldelt = delta.tocsr()[:, remlist]
-    newdelt = coldelt.tocsr()[remlist, :]
-    print(newdelt.shape)
-    newb = b[remlist]
-    print(newb)
-    first = np.zeros(len(newb))
-
-    # CG to get f
-    newf = sparse.linalg.cg(newdelt, newb, x0=first, \
-    maxiter=400, M=None, callback=None, atol=None)
-
-    print(newf[0])
-
-    s = 0
-    o = np.zeros((M_g-(2*r), N_g-(2*r)))
-    for i in range(M_g-(2*r)):
-        for j in range(N_g-(2*r)):
-            o[i][j] = newf[0][s]
-            s+=1
-
-    gray_r[r:-r, r:-r] = o.transpose()
-
-    plt.imshow(gray_f, cmap='gray', interpolation='nearest')
+    plt.imshow(result, cmap='gray', interpolation='nearest')
 
     plt.axis('off')
 
     plt.tight_layout()
     plt.show()
+
+
+def grayhelp(f, g, pos):
+
+    # f* and g as matrices
+    # pos: tuple to situate g
+
+    r = 37
+
+    N = len(g)
+    M = len(g[0])
+
+    # border and f as slice from the whole picture f*
+    cut_f = f[pos[0]: pos[0] + N, pos[1]: pos[1] + M]
+
+    # turning everything except the border to zeros
+    cut_f[r:-r, r:-r] = 0
+
+    # laplace operator to determine missing border values
+    lp_big = laplace(M, N)
+
+    deviation = lp_big @ (cut_f.flatten())
+
+    # determining b by multiplying g with laplace operator and cutting it down
+    gradient_g = lp_big @ (g.flatten())
+
+    # correcting deviation
+    gradient_g -= deviation
+
+    # getting b by turning back into a matrix, deleting the border and
+    # vectorizing again
+    b = ((gradient_g.reshape(N, M))[r:-r, r:-r]).flatten()
+
+    lp_small = laplace(M - 2*r, N - 2*r)
+
+    start = np.zeros(len(b))
+
+    new_f = scipy.sparse.linalg.cg(lp_small, b, x0=start,
+                                   maxiter=400000,
+                                   M=None, callback=None, atol=None)
+
+    replacement = new_f[0].reshape(N-2*r, M-2*r)
+
+    cut_f[r:-r, r:-r] = replacement
+
+    return f
+
 
 
 def D_v(n):
