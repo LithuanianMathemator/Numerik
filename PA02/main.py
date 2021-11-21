@@ -53,6 +53,8 @@ def seamlessmatrix(f, g, pos):
     plt.imshow(result, cmap='gray', interpolation='nearest')
 
     plt.axis('off')
+    
+    plt.title('Gradient ohne Divergenz bei ' + str(f) + ' und ' + str(g) + '!')
 
     plt.tight_layout()
     plt.show()
