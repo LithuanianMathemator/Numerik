@@ -108,7 +108,7 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
     return pic_f
 
 #pic = seamlessdiff_advanced('PA02/water.jpg', 'PA02/bear.jpg', 0, 0)
-#pic = seamlessdiff_advanced('PA02/bird.jpg', 'PA02/plane.jpg', 50, 250, verbose=True)
+#pic = seamlessdiff_advanced('PA02/bird.jpg', 'PA02/plane.jpg', 50, 260, verbose=True)
 
 #plt.imshow(pic, cmap='gray')
 #plt.axis('off')

@@ -181,5 +181,13 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
 
     return pic_f
 
+def plot(img):
+    plt.imshow(img, cmap='gray')
+    plt.axis('off')
+    plt.tight_layout()
+    plt.show()
+
 if __name__ == "__main__":
-    pass
+    
+    plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 18, 18))
+    plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 50, 260))
