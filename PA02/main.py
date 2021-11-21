@@ -1,6 +1,8 @@
 
 import numpy as np
 from scipy import sparse
+from scipy import linalg
+from scipy.linalg import norm
 from matplotlib import pyplot as plt
 from skimage import io
 from skimage.color import rgb2gray
@@ -144,26 +146,10 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
 
         if verbose:
             print('calculated gradient norm')
-        
-        '''
-        v_x = np.ndarray(shape=(n, m))
-        v_y = np.ndarray(shape=(n, m))
-        '''
 
 
         v_x = np.where(norm_f > norm_g, grad_f_x, grad_g_x)
         v_y = np.where(norm_f > norm_g, grad_f_y, grad_g_y)
-
-        '''
-        for j in range(n):
-            for k in range(m):
-                if norm_f[j, k] > norm_g[j, k]:
-                    v_x[j, k] = grad_f_x[j, k]
-                    v_y[j, k] = grad_f_y[j, k]
-                else:
-                    v_x[j, k] = grad_g_x[j, k]
-                    v_y[j, k] = grad_g_y[j, k]
-        '''
 
         if verbose:
             print('determined v')
@@ -174,7 +160,7 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
         f_cut[r:-r, r:-r] = 0
 
         vec_div_v = div_v.flatten('F')
-        b = vec_div_v - laplace(n, m) @ f_cut.flatten('F')
+        b = vec_div_v - laplaceoperator(n, m) @ f_cut.flatten('F')
 
         if verbose:
             print('simplified SLE')
@@ -184,7 +170,7 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
         mask = np.ones(n*m, dtype=bool)
         mask[superfluous_rows] = False
 
-        delta = laplace(n-2*r, m-2*r)
+        delta = laplaceoperator(n-2*r, m-2*r)
         b_cut = np.delete(b, superfluous_rows, axis=0)
 
         if verbose:
