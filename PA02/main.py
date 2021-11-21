@@ -5,10 +5,11 @@ from scipy.linalg import norm
 from matplotlib import pyplot as plt
 from skimage import io
 from skimage.color import rgb2gray
+import scipy.sparse.linalg
 
 def laplaceoperator(n,m):
     # n,m: Bildgröße
-    
+
     l = n * m
     hauptdiag = np.ones(l) * -4
     nebendiag = np.ones(l-1)
@@ -17,9 +18,9 @@ def laplaceoperator(n,m):
     for i in range(1,l-1):
         if i % n == 0:
             nebendiag[i-1] = 0
-            
+
     diagonalen = [hauptdiag, nebendiag, nebendiag, außendiag, außendiag]
-    
+
     matrix = sparse.diags(diagonalen, [0,-1,1,n,-n])
     return matrix
 
@@ -53,7 +54,7 @@ def seamlessmatrix(f, g, pos):
     plt.imshow(result, cmap='gray', interpolation='nearest')
 
     plt.axis('off')
-    
+
     plt.title('Gradient ohne Divergenz bei ' + str(f) + ' und ' + str(g) + '!')
 
     plt.tight_layout()
@@ -95,8 +96,8 @@ def grayhelp(f, g, pos):
 
     start = np.zeros(len(b))
 
-    new_f = sparse.linalg.cg(lp_small, b, x0=start,
-                                   maxiter=400000,
+    new_f = scipy.sparse.linalg.cg(lp_small, b, x0=start,
+                                   maxiter=40000,
                                    M=None, callback=None, atol=None)
 
     replacement = new_f[0].reshape(N-2*r, M-2*r)
@@ -124,7 +125,7 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
     for i in range(3):
         if verbose:
             print('started run', i+1)
-        
+
         f = pic_f_area[:, :, i]
         g = pic_g[:, :, i]
 
@@ -162,7 +163,7 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
             print('simplified SLE')
 
         superfluous_rows = [i for i in range(n*m) if ((i+r)%n < 2*r)  or ((i+n*r)%(m*n) < 2*n*r)]
-        
+
         mask = np.ones(n*m, dtype=bool)
         mask[superfluous_rows] = False
 
@@ -171,8 +172,8 @@ def seamlessdiff_advanced(f, g, x, y, r=5, n_iter=40000, verbose=False):
 
         if verbose:
             print('cut matrices')
-        
-        (vec_h, info) = linalg.cg(delta, b_cut, x0=np.zeros(len(b_cut)), maxiter=n_iter, atol=None, M=None, callback=None)
+
+        (vec_h, info) = scipy.sparse.linalg.cg(delta, b_cut, x0=np.zeros(len(b_cut)), maxiter=n_iter, atol=None, M=None, callback=None)
         print('.')
         h[:, :, i] = vec_h.reshape(n-2*r, m-2*r, order='F')
         if verbose:
@@ -208,12 +209,11 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     plt.show()
-    
+
     plot(mergeimages('water.jpg', 'bear.jpg', 18, 18), 'Bilder unbearbeitet übereinander')
     seamlessmatrix('water.jpg', 'bear.jpg', (18,18))
     plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 18, 18), 'Bilder mit Gradient mit Divergenz bearbeitet')
 
-    plot(mergeimages('water.jpg', 'bear.jpg', 50, 260), 'Bilder unbearbeitet übereinander')
-    seamlessmatrix('bird.jpg', 'plane.jpg', (50,260))
-    plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 50, 260), 'Bilder mit Gradient mit Divergenz bearbeitet')
-    
+    plot(mergeimages('bird.jpg', 'plane.jpg', 50, 340), 'Bilder unbearbeitet übereinander')
+    seamlessmatrix('bird.jpg', 'plane.jpg', (50,340))
+    plot(seamlessdiff_advanced('bird.jpg', 'plane.jpg', 50, 340), 'Bilder mit Gradient mit Divergenz bearbeitet')
