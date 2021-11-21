@@ -93,7 +93,7 @@ def grayhelp(f, g, pos):
 
     start = np.zeros(len(b))
 
-    new_f = scipy.sparse.linalg.cg(lp_small, b, x0=start,
+    new_f = sparse.linalg.cg(lp_small, b, x0=start,
                                    maxiter=400000,
                                    M=None, callback=None, atol=None)
 
