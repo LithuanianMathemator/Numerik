@@ -192,9 +192,10 @@ def mergeimages(f, g, x, y):
 
     return img_f
 
-def plot(img):
+def plot(img, title):
     plt.imshow(img, cmap='gray')
     plt.axis('off')
+    plt.title(title)
     plt.tight_layout()
     plt.show()
 
@@ -208,11 +209,11 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.show()
     
-    plot(mergeimages('water.jpg', 'bear.jpg', 18, 18))
+    plot(mergeimages('water.jpg', 'bear.jpg', 18, 18), 'Bilder unbearbeitet übereinander')
     seamlessmatrix('water.jpg', 'bear.jpg', (18,18))
-    plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 18, 18))
+    plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 18, 18), 'Bilder mit Gradient mit Divergenz bearbeitet')
 
-    plot(mergeimages('water.jpg', 'bear.jpg', 50, 260))
+    plot(mergeimages('water.jpg', 'bear.jpg', 50, 260), 'Bilder unbearbeitet übereinander')
     seamlessmatrix('bird.jpg', 'plane.jpg', (50,260))
-    plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 50, 260))
+    plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 50, 260), 'Bilder mit Gradient mit Divergenz bearbeitet')
     
