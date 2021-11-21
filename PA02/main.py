@@ -1,4 +1,3 @@
-
 import numpy as np
 from scipy import sparse
 from scipy import linalg
@@ -188,6 +187,14 @@ def plot(img):
     plt.show()
 
 if __name__ == "__main__":
-    
+    laplacer = laplaceoperator(5,7)
+    laplacer = laplacer.toarray()
+    plt.imshow(laplacer, cmap='gray', interpolation='nearest')
+
+    plt.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
     plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 18, 18))
     plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 50, 260))
