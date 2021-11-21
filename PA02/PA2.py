@@ -110,8 +110,3 @@ def seamlessdiff(f, g, pos):
 
     plt.tight_layout()
     plt.show()
-
-
-def seamlessdiff_advanced(f, g):
-    pic_f = io.imread(f)
-    pic_g = io.imread(g)
