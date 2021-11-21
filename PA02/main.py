@@ -195,6 +195,10 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     plt.show()
-
+    
+    seamlessmatrix('water.jpg', 'bear.jpg', (18,18))
+    seamlessmatrix('bird.jpg', 'plane.jpg', (50,260))
+    
     plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 18, 18))
     plot(seamlessdiff_advanced('water.jpg', 'bear.jpg', 50, 260))
+    
