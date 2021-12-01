@@ -70,3 +70,5 @@ def testfirst():
         plt.imshow(variance(numbers[i]), cmap = 'gray')
         plt.title("Varianz für " + str(i) + "!")
         plt.show()
+
+        
