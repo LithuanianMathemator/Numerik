@@ -9,11 +9,11 @@ def mean(A):
 
     N = len(A)
 
-    pxl = np.copy(A[0])
+    pxl = np.copy(np.int64(A[0]))
 
     for i in range(1, N):
 
-        pxl += A[i]
+        pxl += np.int64(A[i])
 
     b = (1/N) * pxl
 
@@ -28,11 +28,11 @@ def variance(A):
     # mean for squared difference
     b = mean(A)
 
-    pxl = np.square(A[0] - b)
+    pxl = np.square(np.int64(A[0]) - b)
 
     for i in range(1, N):
 
-        pxl += np.square(A[i] - b)
+        pxl += np.square(np.int64(A[i]) - b)
 
     V = (1/N) * pxl
 
