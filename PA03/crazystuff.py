@@ -185,3 +185,91 @@ def testthird():
 
     plt.tight_layout()
     plt.show()
+    
+# fourth excercise
+
+def kmeans():
+
+    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.reshape(imgs[16:], [-1, 28, 28])
+
+    labs = np.fromfile('train-labels-idx1-ubyte', dtype=np.uint8)
+    labs = labs[8:]
+
+    # list for pictures of each number
+    numbers = [[] for i in range(10)]
+
+    N = len(imgs)
+
+    # distributing pictures
+    for i in range(N):
+
+        numbers[labs[i]].append(imgs[i])
+
+    # slicing for 1000 pictures each
+    for i in range(10):
+
+        numbers[i] = numbers[i][:1000]
+
+    # two random, different sets
+    # testset = random.sample(numbers, 2)
+
+    aa, bb = 4, 6
+
+    testset = [numbers[aa], numbers[bb]]
+
+    test = testset[0] + testset[1]
+
+    A, b = dsubspace(test, 2)
+
+    reduced_data = []
+
+    for i in range(len(test)):
+
+        reduced = A.transpose() @ (test[i].flatten() - b)
+        reduced_data.append(reduced)
+
+    # initial representants
+    b_1 = mean(reduced_data[:(len(test)//2)]).flatten()
+    b_2 = mean(reduced_data[(len(test)//2 + 1):]).flatten()
+
+    C_1 = []
+    C_2 = []
+    j = 0
+
+    while j < 40:
+
+        C_1 = []
+        C_2 = []
+
+        for i in range(len(reduced_data)):
+
+            a_1 = np.linalg.norm(b_1 - reduced_data[i])**2
+            a_2 = np.linalg.norm(b_2 - reduced_data[i])**2
+
+            if a_1 > a_2:
+                C_1.append(reduced_data[i])
+            else:
+                C_2.append(reduced_data[i])
+
+        b_1 = mean(C_1)
+        b_2 = mean(C_2)
+
+        j += 1
+
+    x_1, x_2, y_1, y_2 = [], [], [], []
+
+    for i in range(len(C_1)):
+        x_1.append(C_1[i][0])
+        y_1.append(C_1[i][1])
+
+    for i in range(len(C_2)):
+        x_2.append(C_2[i][0])
+        y_2.append(C_2[i][1])
+
+    plt.scatter(np.real(x_1), np.real(y_1), color = 'red')
+    plt.scatter(np.real(x_2), np.real(y_2), color = 'blue')
+    plt.title("Scatter für Samples von " + str(aa) + \
+    " und " + str(bb) + "!")
+    plt.show()
+
