@@ -272,3 +272,8 @@ def kmeans():
     plt.title("Scatter für Samples von " + str(aa) + \
     " und " + str(bb) + "!")
     plt.show()
+
+testfirst()
+testsecond()
+testthird()
+kmeans()
