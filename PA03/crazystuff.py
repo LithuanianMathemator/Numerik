@@ -13,10 +13,10 @@ def variance(A):
 
 def testfirst():
 
-    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
 
-    labs = np.fromfile('train-labels-idx1-ubyte', dtype=np.uint8)
+    labs = np.fromfile('PA03/train-labels-idx1-ubyte', dtype=np.uint8)
     labs = labs[8:]
 
     # list for pictures of each number
@@ -42,13 +42,13 @@ def testfirst():
             fig.add_subplot(4, 5, i)
             plt.imshow(mean(numbers[i-1]), cmap = 'gray', \
             interpolation = 'nearest')
-            plt.title("Mittelwert für " + str(i) + "!")
+            plt.title("Mittelwert für " + str(i-1) + "!")
             plt.axis('off')
         else:
             fig.add_subplot(4, 5, i)
             plt.imshow(variance(numbers[i-11]), cmap = 'gray', \
             interpolation = 'nearest')
-            plt.title("Varianz für " + str(i) + "!")
+            plt.title("Varianz für " + str(i-11) + "!")
             plt.axis('off')
 
     plt.tight_layout()
@@ -88,7 +88,7 @@ def singular(A):
 
 def testsecond():
 
-    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
     imgs = np.int64(imgs[:1000])
 
@@ -131,10 +131,10 @@ def projection(A, b, x):
 
 def testthird():
 
-    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
 
-    labs = np.fromfile('train-labels-idx1-ubyte', dtype=np.uint8)
+    labs = np.fromfile('PA03/train-labels-idx1-ubyte', dtype=np.uint8)
     labs = labs[8:]
 
     # first test: principal components
@@ -190,10 +190,10 @@ def testthird():
 
 def kmeans():
 
-    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
 
-    labs = np.fromfile('train-labels-idx1-ubyte', dtype=np.uint8)
+    labs = np.fromfile('PA03/train-labels-idx1-ubyte', dtype=np.uint8)
     labs = labs[8:]
 
     # list for pictures of each number
@@ -273,3 +273,4 @@ def kmeans():
     " und " + str(bb) + "!")
     plt.show()
 
+testfirst()
