@@ -6,10 +6,39 @@ import random
 # first excercise
 
 def mean(A):
-    return np.mean(A, axis = 0)
+
+    # A as set of pictures
+
+    N = len(A)
+
+    pxl = np.copy(np.int64(A[0]))
+
+    for i in range(1, N):
+
+        pxl += np.int64(A[i])
+
+    b = (1/N) * pxl
+
+    return b
 
 def variance(A):
-    return np.var(A, axis = 0)
+
+    # A as set of pictures
+
+    N = len(A)
+
+    # mean for squared difference
+    b = mean(A)
+
+    pxl = np.square(np.int64(A[0]) - b)
+
+    for i in range(1, N):
+
+        pxl += np.square(np.int64(A[i]) - b)
+
+    V = (1/N) * pxl
+
+    return V
 
 def testfirst():
 
