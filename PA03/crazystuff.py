@@ -13,10 +13,10 @@ def variance(A):
 
 def testfirst():
 
-    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
 
-    labs = np.fromfile('PA03/train-labels-idx1-ubyte', dtype=np.uint8)
+    labs = np.fromfile('train-labels-idx1-ubyte', dtype=np.uint8)
     labs = labs[8:]
 
     # list for pictures of each number
@@ -88,7 +88,7 @@ def singular(A):
 
 def testsecond():
 
-    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
     imgs = np.int64(imgs[:1000])
 
@@ -131,10 +131,10 @@ def projection(A, b, x):
 
 def testthird():
 
-    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
 
-    labs = np.fromfile('PA03/train-labels-idx1-ubyte', dtype=np.uint8)
+    labs = np.fromfile('train-labels-idx1-ubyte', dtype=np.uint8)
     labs = labs[8:]
 
     # first test: principal components
@@ -190,10 +190,10 @@ def testthird():
 
 def kmeans():
 
-    imgs = np.fromfile('PA03/train-images-idx3-ubyte', dtype=np.uint8)
+    imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
 
-    labs = np.fromfile('PA03/train-labels-idx1-ubyte', dtype=np.uint8)
+    labs = np.fromfile('train-labels-idx1-ubyte', dtype=np.uint8)
     labs = labs[8:]
 
     # list for pictures of each number
@@ -273,4 +273,4 @@ def kmeans():
     " und " + str(bb) + "!")
     plt.show()
 
-testfirst()
+kmeans()
