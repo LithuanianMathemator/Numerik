@@ -353,7 +353,7 @@ def tabelle4(set1=0, set2=1, n=1000):
             a_1 = np.linalg.norm(b_1 - reduced_data[i])**2
             a_2 = np.linalg.norm(b_2 - reduced_data[i])**2
 
-            if a_1 > a_2:
+            if a_1 < a_2:
                 C_1.append(reduced_data[i])
             else:
                 C_2.append(reduced_data[i])
