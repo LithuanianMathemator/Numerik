@@ -430,6 +430,7 @@ def tabelle4(set1=0, set2=1, n=1000):
               bbox=[0, -0.5, 1, 0.3])
     plt.tight_layout()
     plt.show()
+
 tabelle4(set1=4, set2=2)
 
 #testfirst()
