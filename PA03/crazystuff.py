@@ -321,4 +321,3 @@ def represent(reduced_data):
     b_2 = mean(reduced_data_1[(len(reduced_data)//2 + 1):]).flatten()
 
     return b_1, b_2
-
