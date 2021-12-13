@@ -306,6 +306,7 @@ def kmeans(set1=0, set2=1, n=1000):
     plt.scatter(b_1[0], b_1[1], color='black', linewidths=2)
     plt.scatter(b_2[0], b_2[1], color='black', linewidths=2)
     plt.axline((b_1+b_2)/2, slope=-np.divide((b_1[0]-b_2[0]), (b_1[1]-b_2[1])), color='black')
+    plt.title("Scatter für alle Bilder von " + str(set1) + " und " + str(set2) + "!")
     plt.show()
 
     np.seterr(divide='ignore')
@@ -328,7 +329,7 @@ def kmeans(set1=0, set2=1, n=1000):
     
     
 if __name__ == "__main__":
-    #testfirst()
-    #testsecond()
-    #testthird()
+    testfirst()
+    testsecond()
+    testthird()
     kmeans()
