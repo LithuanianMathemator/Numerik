@@ -314,3 +314,7 @@ def kmeans(set1=0, set2=1, n=1000):
               bbox=[0, -0.5, 1, 0.3])
     plt.tight_layout()
     plt.show()
+    
+    
+if __name__ == "__main__":
+    pass
