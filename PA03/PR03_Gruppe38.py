@@ -7,10 +7,10 @@ import random
 # first excercise
 
 def mean(A):
-    return np.mean(A, axis = 0)
+    return np.mean(A, axis = 0).real
 
 def variance(A):
-    return np.var(A, axis = 0)
+    return np.var(A, axis = 0).real
 
 def testfirst():
 
@@ -297,6 +297,17 @@ def kmeans(set1=0, set2=1, n=1000):
     print(str(set1) + ' richtig erkannt: '+ str(n1_right)+'/100')
     print(str(set2) + ' richtig erkannt: '+ str(n2_right)+'/100')
 
+    value1_x = [C_1[i][0] for i in range(len(C_1))]
+    value1_y = [C_1[i][1] for i in range(len(C_1))]
+    value2_x = [C_2[i][0] for i in range(len(C_2))]
+    value2_y = [C_2[i][1] for i in range(len(C_2))]
+    plt.scatter(value1_x, value1_y, color='red')
+    plt.scatter(value2_x, value2_y, color='blue')
+    plt.scatter(b_1[0], b_1[1], color='black', linewidths=2)
+    plt.scatter(b_2[0], b_2[1], color='black', linewidths=2)
+    plt.axline((b_1+b_2)/2, slope=-np.divide((b_1[0]-b_2[0]), (b_1[1]-b_2[1])), color='black')
+    plt.show()
+
     np.seterr(divide='ignore')
     plt.scatter(set1_right[0], set1_right[1], color='red' , label=str(set1)+' korrekt')
     plt.scatter(set1_wrong[0], set1_wrong[1], color='blue', label=str(set1)+' falsch' )
@@ -317,7 +328,7 @@ def kmeans(set1=0, set2=1, n=1000):
     
     
 if __name__ == "__main__":
-    testfirst()
-    testsecond()
-    testthird()
+    #testfirst()
+    #testsecond()
+    #testthird()
     kmeans()
