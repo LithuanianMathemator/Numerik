@@ -7,10 +7,10 @@ import random
 # first excercise
 
 def mean(A):
-    return np.mean(A, axis = 0)
+    return np.mean(A, axis = 0).real
 
 def variance(A):
-    return np.var(A, axis = 0)
+    return np.var(A, axis = 0).real
 
 def testfirst():
 
