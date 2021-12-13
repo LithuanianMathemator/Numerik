@@ -1,5 +1,4 @@
 
-from matplotlib.markers import MarkerStyle
 import numpy as np
 from matplotlib import pyplot as plt
 import random
