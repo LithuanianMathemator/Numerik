@@ -214,10 +214,71 @@ def testthird():
 
     plt.tight_layout()
     plt.show()
-    
+
 # fourth excercise
 
-def kmeans():
+def kmeans(n, dataset):
+
+    # extracting data from labeled dataset
+
+    data = []
+
+    for i in range(len(dataset)):
+        data.append(dataset[i][0])
+
+    A, B = dsubspace(data, 2)
+
+    reduced_data = []
+
+    for i in range(len(dataset)):
+
+        reduced = A.transpose() @ (dataset[i][0].flatten() - B)
+        reduced_data.append((reduced, dataset[i][1]))
+
+    # initial representants
+    b_1, b_2 = represent(reduced_data)
+
+    j = 0
+
+    while j < n:
+
+        C_1 = []
+        C_2 = []
+
+        for i in range(len(reduced_data)):
+
+            a_1 = np.linalg.norm(b_1 - reduced_data[i][0])**2
+            a_2 = np.linalg.norm(b_2 - reduced_data[i][0])**2
+
+            if a_1 < a_2:
+                C_1.append(reduced_data[i])
+            else:
+                C_2.append(reduced_data[i])
+
+        meanc1 = [C_1[i][0] for i in range(len(C_1))]
+        meanc2 = [C_2[i][0] for i in range(len(C_2))]
+
+        b_1 = mean(meanc1)
+        b_2 = mean(meanc2)
+
+        j += 1
+
+    x_1, x_2, y_1, y_2, l_1, l_2 = [], [], [], [], [], []
+
+    for i in range(len(C_1)):
+        x_1.append(C_1[i][0][0])
+        y_1.append(C_1[i][0][1])
+        l_1.append(C_1[i][1])
+
+    for i in range(len(C_2)):
+        x_2.append(C_2[i][0][0])
+        y_2.append(C_2[i][0][1])
+        l_2.append(C_2[i][1])
+
+    return (np.real(x_1), np.real(y_1), np.real(x_2), np.real(y_2), l_1, l_2)
+
+
+def kmeanstest(n, a, b):
 
     imgs = np.fromfile('train-images-idx3-ubyte', dtype=np.uint8)
     imgs = np.reshape(imgs[16:], [-1, 28, 28])
@@ -233,76 +294,59 @@ def kmeans():
     # distributing pictures
     for i in range(N):
 
-        numbers[labs[i]].append(imgs[i])
+        numbers[labs[i]].append((imgs[i], labs[i]))
 
     # slicing for 1000 pictures each
     for i in range(10):
 
         numbers[i] = numbers[i][:1000]
 
-    # two random, different sets
-    # testset = random.sample(numbers, 2)
+    test = numbers[a] + numbers[b]
 
-    aa, bb = 4, 6
+    x_1, y_1, x_2, y_2, l_1, l_2 = kmeans(n, test)
 
-    testset = [numbers[aa], numbers[bb]]
-
-    test = testset[0] + testset[1]
-
-    A, b = dsubspace(test, 2)
-
-    reduced_data = []
-
-    for i in range(len(test)):
-
-        reduced = A.transpose() @ (test[i].flatten() - b)
-        reduced_data.append(reduced)
-
-    # initial representants
-    b_1 = mean(reduced_data[:(len(test)//2)]).flatten()
-    b_2 = mean(reduced_data[(len(test)//2 + 1):]).flatten()
-
-    C_1 = []
-    C_2 = []
-    j = 0
-
-    while j < 40:
-
-        C_1 = []
-        C_2 = []
-
-        for i in range(len(reduced_data)):
-
-            a_1 = np.linalg.norm(b_1 - reduced_data[i])**2
-            a_2 = np.linalg.norm(b_2 - reduced_data[i])**2
-
-            if a_1 > a_2:
-                C_1.append(reduced_data[i])
-            else:
-                C_2.append(reduced_data[i])
-
-        b_1 = mean(C_1)
-        b_2 = mean(C_2)
-
-        j += 1
-
-    x_1, x_2, y_1, y_2 = [], [], [], []
-
-    for i in range(len(C_1)):
-        x_1.append(C_1[i][0])
-        y_1.append(C_1[i][1])
-
-    for i in range(len(C_2)):
-        x_2.append(C_2[i][0])
-        y_2.append(C_2[i][1])
-
-    plt.scatter(np.real(x_1), np.real(y_1), color = 'red')
-    plt.scatter(np.real(x_2), np.real(y_2), color = 'blue')
-    plt.title("Scatter für Samples von " + str(aa) + \
-    " und " + str(bb) + "!")
+    plt.scatter(x_1, y_1, color = 'red')
+    plt.scatter(x_2, y_2, color = 'blue')
+    plt.title("Scatter für Samples von " + str(a) + \
+    " und " + str(b) + "!")
     plt.show()
 
-testfirst()
-testsecond()
-testthird()
-kmeans()
+    # classifying 100 pictures, giving out table:
+
+    second = numbers[a][:100] + numbers[b][:100]
+
+    x_1, y_1, x_2, y_2, l_1, l_2 = kmeans(n, second)
+
+    correct_1_count = 0
+    correct_2_count = 0
+    false_1_count = 0
+    false_2_count = 0
+
+    for i in range(len(l_1)):
+
+        if l_1[i] == a:
+            correct_1_count += 1
+        else:
+            false_2_count += 1
+
+    for i in range(len(l_2)):
+
+        if l_2[i] == b:
+            correct_2_count += 1
+        else:
+            false_1_count += 1
+
+    print(tabulate([[str(a), correct_1_count, false_1_count], \
+    [str(b), correct_2_count, false_2_count]], \
+    headers=['Ziffer', 'Richtig', 'Falsch']))
+
+
+def represent(reduced_data):
+
+    reduced_data_1 = [reduced_data[i][0] for i in range(len(reduced_data))]
+
+    b_1 = mean(reduced_data_1[:(len(reduced_data)//2)]).flatten()
+    b_2 = mean(reduced_data_1[(len(reduced_data)//2 + 1):]).flatten()
+
+    return b_1, b_2
+
