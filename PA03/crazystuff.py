@@ -2,43 +2,15 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import random
+from tabulate import tabulate
 
 # first excercise
 
 def mean(A):
-
-    # A as set of pictures
-
-    N = len(A)
-
-    pxl = np.copy(np.int64(A[0]))
-
-    for i in range(1, N):
-
-        pxl += np.int64(A[i])
-
-    b = (1/N) * pxl
-
-    return b
+    return np.mean(A, axis = 0)
 
 def variance(A):
-
-    # A as set of pictures
-
-    N = len(A)
-
-    # mean for squared difference
-    b = mean(A)
-
-    pxl = np.square(np.int64(A[0]) - b)
-
-    for i in range(1, N):
-
-        pxl += np.square(np.int64(A[i]) - b)
-
-    V = (1/N) * pxl
-
-    return V
+    return np.var(A, axis = 0)
 
 def testfirst():
 
@@ -71,13 +43,13 @@ def testfirst():
             fig.add_subplot(4, 5, i)
             plt.imshow(mean(numbers[i-1]), cmap = 'gray', \
             interpolation = 'nearest')
-            plt.title("Mittelwert für " + str(i-1) + "!")
+            plt.title("Mittelwert für " + str(i) + "!")
             plt.axis('off')
         else:
             fig.add_subplot(4, 5, i)
             plt.imshow(variance(numbers[i-11]), cmap = 'gray', \
             interpolation = 'nearest')
-            plt.title("Varianz für " + str(i-11) + "!")
+            plt.title("Varianz für " + str(i) + "!")
             plt.axis('off')
 
     plt.tight_layout()
