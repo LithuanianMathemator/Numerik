@@ -317,4 +317,7 @@ def kmeans(set1=0, set2=1, n=1000):
     
     
 if __name__ == "__main__":
-    pass
+    testfirst()
+    testsecond()
+    testthird()
+    kmeans()
