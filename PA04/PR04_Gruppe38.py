@@ -110,7 +110,7 @@ def testfourth():
 
     B = einheitswurzel(n, d, n_max, delta, epsilon)
     
-    plt.imshow(np.angle(B))
+    plt.imshow(np.angle(B), cmap='hsv')
     plt.grid()
     plt.show()
 
@@ -129,8 +129,8 @@ def testfifth():
     
     fig, (ax1, ax2) = plt.subplots(1,2)
     fig.suptitle('z^5=0')
-    ax1.imshow(np.angle(B1))
-    ax2.imshow(np.angle(B2))
+    ax1.imshow(np.angle(B1), cmap='hsv')
+    ax2.imshow(np.angle(B2), cmap='hsv')
     ax1.grid()
     ax2.grid()
     ax1.set_title(f'n_max = {n_max_1}')
@@ -139,3 +139,30 @@ def testfifth():
 
 ##### 6. #####
 
+##### 7. #####
+
+def mandelbrot_iteration(z, n_max, limit):
+    c = z
+    for _ in range(n_max):
+        z = z*z+c
+    return np.linalg.norm(z) <= limit
+
+def testseventh():
+    n = 8
+    space_x = np.linspace(-1.5, 0.5, n)
+    space_y = np.linspace(-1, 1, n)
+    B_grid = np.array([[np.complex(a, b) for a in space_x] for b in space_y])
+    B = np.ndarray((n, n), dtype=bool)
+
+    n_max = 256
+    limit = 2
+
+    for x in range(n):
+        for y in range(n):
+            z = B_grid[x, y]
+            B[x, y] = mandelbrot_iteration(z, n_max, limit)
+    
+    print(B)
+    plt.imshow(B, cmap='hsv')
+    plt.grid()
+    plt.show()
