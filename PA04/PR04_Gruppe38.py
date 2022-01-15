@@ -82,5 +82,26 @@ def testthird():
 
 ##### 4. #####
 
-def testfourth():
-    pass
+def testfourth(d=3):
+    n = 512
+    space = np.linspace(-1, 1, n)
+    B_grid = np.array([[np.complex(a, b) for a in space] for b in space])
+    B = np.ndarray((n, n), dtype=complex)
+
+    F = lambda z: np.array([z**d-1])
+    dF = lambda z: np.array([d*z**(d-1)])
+
+    n_max = 15
+    delta = 0.00001
+    epsilon = 0.00001
+
+    for x in range(n):
+        for y in range(n):
+            z = B_grid[x, y]
+            B[x, y] = newton(F, dF, np.array([z]), delta=delta, epsilon=epsilon, maxIter=n_max)
+    
+    plt.imshow(np.angle(B))
+    plt.grid()
+    plt.show()
+
+testfourth()
