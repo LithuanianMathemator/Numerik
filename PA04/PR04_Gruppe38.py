@@ -103,5 +103,3 @@ def testfourth(d=3):
     plt.imshow(np.angle(B))
     plt.grid()
     plt.show()
-
-testfourth()
