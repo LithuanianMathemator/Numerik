@@ -186,7 +186,7 @@ def mandelbrot_iteration(z, n_max, limit):
     return np.linalg.norm(z) <= limit
 
 def testseventh():
-    n = 8
+    n = 1024
     space_x = np.linspace(-1.5, 0.5, n)
     space_y = np.linspace(-1, 1, n)
     B_grid = np.array([[np.complex(a, b) for a in space_x] for b in space_y])
@@ -200,7 +200,8 @@ def testseventh():
             z = B_grid[x, y]
             B[x, y] = mandelbrot_iteration(z, n_max, limit)
     
-    print(B)
-    plt.imshow(B, cmap='hsv')
+    plt.imshow(B)
     plt.grid()
     plt.show()
+
+testseventh()
