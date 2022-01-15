@@ -82,8 +82,7 @@ def testthird():
 
 ##### 4. #####
 
-def testfourth(d=3):
-    n = 512
+def einheitswurzel(d, n, n_max, delta, epsilon):
     space = np.linspace(-1, 1, n)
     B_grid = np.array([[np.complex(a, b) for a in space] for b in space])
     B = np.ndarray((n, n), dtype=complex)
@@ -91,15 +90,52 @@ def testfourth(d=3):
     F = lambda z: np.array([z**d-1])
     dF = lambda z: np.array([d*z**(d-1)])
 
+    for x in range(n):
+        for y in range(n):
+            z = B_grid[x, y]
+            try:
+                B[x, y] = newton(F, dF, np.array([z]), delta=delta, epsilon=epsilon, maxIter=n_max)
+            except np.linalg.LinAlgError:
+                B[x, y] = 0
+    return B
+
+    
+
+def testfourth():
+    n = 512
+    d = 3
     n_max = 15
     delta = 0.00001
     epsilon = 0.00001
 
-    for x in range(n):
-        for y in range(n):
-            z = B_grid[x, y]
-            B[x, y] = newton(F, dF, np.array([z]), delta=delta, epsilon=epsilon, maxIter=n_max)
+    B = einheitswurzel(n, d, n_max, delta, epsilon)
     
     plt.imshow(np.angle(B))
     plt.grid()
     plt.show()
+
+##### 5. #####
+
+def testfifth():
+    n = 512
+    d = 5
+    n_max_1 = 5
+    n_max_2 = 15
+    delta = 0.00000000000001
+    epsilon = 0.00000000000001
+
+    B1 = einheitswurzel(d, n, n_max_1, delta, epsilon)
+    B2 = einheitswurzel(d, n, n_max_2, delta, epsilon)
+    
+    fig, (ax1, ax2) = plt.subplots(1,2)
+    fig.suptitle('z^5=0')
+    ax1.imshow(np.angle(B1))
+    ax2.imshow(np.angle(B2))
+    ax1.grid()
+    ax2.grid()
+    ax1.set_title(f'n_max = {n_max_1}')
+    ax2.set_title(f'n_max = {n_max_2}')
+    plt.show()
+
+##### 6. #####
+
