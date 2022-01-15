@@ -113,6 +113,44 @@ def testfourth():
     plt.imshow(np.angle(B))
     plt.grid()
     plt.show()
+    
+
+##### Alternative zu 4. #####    
+    
+
+def func4(x):
+    return np.array([x[0]**3 - 1])
+
+
+def derivative4(x):
+    return np.array([[3*(x[0]**2)]])
+
+
+def newton3():
+
+    x = np.linspace(-1, 1, num=512)
+
+    nums = np.empty([512, 512], dtype=np.complex128)
+
+    for i in range(512):
+        nums[512 - i - 1] = x + 1.0j*x[i]
+
+    res = np.empty([512, 512], dtype=np.complex128)
+
+    for i in range(512):
+        for j in range(512):
+            res[i][j] = newton(func4, derivative4, np.array([nums[i][j]]),
+                               0.00001, 0.00001, 15)[0]
+
+    picture = np.zeros((512, 512))
+
+    for i in range(512):
+        for j in range(512):
+
+            picture[i][j] = np.angle(res[i][j])
+
+    plt.imshow(picture)
+    plt.show()
 
 ##### 5. #####
 
