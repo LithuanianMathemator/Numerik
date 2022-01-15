@@ -79,3 +79,8 @@ def derivative3(x):
 def testthird():
     return newton(func3, derivative3, np.array([0.08, 0.7]),\
      0.000000001, 0.000000001)
+
+##### 4. #####
+
+def testfourth():
+    pass
