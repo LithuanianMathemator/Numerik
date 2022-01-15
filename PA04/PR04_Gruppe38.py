@@ -108,7 +108,7 @@ def testfourth():
     delta = 0.00001
     epsilon = 0.00001
 
-    B = einheitswurzel(n, d, n_max, delta, epsilon)
+    B = einheitswurzel(d, n, n_max, delta, epsilon)
     
     plt.imshow(np.angle(B))
     plt.grid()
