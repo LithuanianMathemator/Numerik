@@ -80,7 +80,9 @@ def testthird():
     return newton(func3, derivative3, np.array([0.08, 0.7]),\
      0.000000001, 0.000000001)
 
+
 ##### 4. #####
+
 
 def einheitswurzel(d, n, n_max, delta, epsilon):
     space = np.linspace(-1, 1, n)
@@ -151,8 +153,10 @@ def newton3():
 
     plt.imshow(picture)
     plt.show()
+    
 
 ##### 5. #####
+
 
 def testfifth():
     n = 512
@@ -177,7 +181,24 @@ def testfifth():
 
 ##### 6. #####
 
+
+def minimize():
+
+    return newton(func6, derivative6, np.array([-1.1, 1.1]), 0.00000000001,
+                  0.00000000001, 1000)
+
+
+def func6(x):
+    return np.array([4*(x[0] + 1)**3, 4*(x[1] - 1)**3])
+
+
+def derivative6(x):
+    return np.array([[12*(x[0] + 1)**2, 0],
+                     [0, 12*(x[1] - 1)**2]])
+
+
 ##### 7. #####
+
 
 def mandelbrot_iteration(z, n_max, limit):
     c = z
