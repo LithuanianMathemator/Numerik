@@ -225,4 +225,10 @@ def testseventh():
     plt.grid()
     plt.show()
 
-testseventh()
+if __name__ == '__main__':
+    testsecond()
+    testthird()
+    testfourth()
+    testfifth()
+    
+    testseventh()
