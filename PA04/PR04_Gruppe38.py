@@ -1,4 +1,5 @@
 
+from time import time
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -225,26 +226,27 @@ def testsixth():
 ##### 7. #####
 
 
-def mandelbrot_iteration(z, n_max, limit):
+def mandelbrot_iteration(z, n_max):
     c = z
-    for _ in range(n_max):
+    for i in range(n_max):
+        if z.real*z.real+z.imag*z.imag > 4:
+            return i
         z = z*z+c
-    return np.linalg.norm(z) <= limit
+    return 255
 
 def testseventh():
     n = 1024
     space_x = np.linspace(-1.5, 0.5, n)
     space_y = np.linspace(-1, 1, n)
     B_grid = np.array([[np.complex(a, b) for a in space_x] for b in space_y])
-    B = np.ndarray((n, n), dtype=bool)
+    B = np.ndarray((n, n), dtype=int)
 
     n_max = 256
-    limit = 2
 
     for x in range(n):
         for y in range(n):
             z = B_grid[x, y]
-            B[x, y] = mandelbrot_iteration(z, n_max, limit)
+            B[x, y] = mandelbrot_iteration(z, n_max)
     
     plt.imshow(B)
     plt.grid()
