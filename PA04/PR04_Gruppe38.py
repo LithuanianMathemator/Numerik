@@ -63,6 +63,7 @@ def testsecond():
     plt.scatter(x_1[0], x_0[1], color = 'green')
     plt.scatter(x_2[0], x_0[1], color = 'green')
     plt.grid()
+    plt.title('Nullstellen der Funktion x^3-2x')
     plt.show()
 
 
@@ -77,8 +78,12 @@ def derivative3(x):
                      [-(3/4)*np.exp(-x[0]), -1]])
 
 def testthird():
-    return newton(func3, derivative3, np.array([0.08, 0.7]),\
+    result = newton(func3, derivative3, np.array([0.08, 0.7]),\
      0.000000001, 0.000000001)
+    plt.title(f'Nullstelle der Funktion f(x)=(x1^2+x2^2-6*x1, 3/4*e^(-x1)-x2)^T\n(x0, x1) = ({result[0]:.3f}, {result[1]:.3f})')
+    plt.plot(result[0], result[1], marker='x')
+    plt.grid()
+    plt.show()
 
 
 ##### 4. #####
@@ -196,6 +201,26 @@ def derivative6(x):
     return np.array([[12*(x[0] + 1)**2, 0],
                      [0, 12*(x[1] - 1)**2]])
 
+def testsixth():
+    fun = lambda a, b: (a+1)**4+(b-1)**4
+    result = minimize()
+    x1 = np.arange(-2, 0, 0.05)
+    x2 = np.arange(0, 2, 0.05)
+    X1, X2 = np.meshgrid(x1, x2)
+    y = np.array([fun(a, b) for a,b in zip(np.ravel(X1), np.ravel(X2))])
+    Y = y.reshape(X1.shape)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_wireframe(X1, X2, Y)
+    ax.plot(result[0], result[1], fun(result[0], result[1]), marker='|', markerfacecolor='red', markeredgecolor='red', markersize=30)
+    ax.set_xlabel('X1')
+    ax.set_ylabel('X2')
+    ax.set_zlabel('Y')
+    ax.set_title(f'Minimierer der Funktion f(x)=(x1 + 1)^4+(x2-1)^4\n(x1, x2) = ({result[0]:.3f}, {result[1]:.3f})')
+
+    plt.show()
+
 
 ##### 7. #####
 
@@ -230,5 +255,5 @@ if __name__ == '__main__':
     testthird()
     testfourth()
     testfifth()
-    
+    testsixth()
     testseventh()
