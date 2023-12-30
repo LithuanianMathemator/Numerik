@@ -1,6 +1,5 @@
 # Programming excercises from "Numerik I" at Technische Universität Berlin
 
-![alt text](https://github.com/LithuanianMathemator/Programmieraufgaben/blob/main/tulogo.png?raw=true)
 
 ### Developed by:
 
